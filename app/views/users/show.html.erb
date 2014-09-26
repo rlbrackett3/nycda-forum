@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @user.username.capitalize %></h1>
+<h3><%= @user.email %></h3>
+
+<h4>Topics</h4>
+<% if @user.topics.count > 0 %>
+  <ul>
+    <% @user.topics.each do |topic| %>
+      <li>
+        <%= link_to topic.title, topic_path(topic) %>
+        <%= topic.description.truncate(50) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p><%= @user.username.capitalize %> has no topics</p> 
+<% end %>
+
+<h4>Replies</h4>
+<% if @user.replies.count > 0 %>
+  <ul>
+    <% @user.replies.each do |reply| %>
+      <li>
+        <%= link_to reply.topic.title, topic_path(reply.topic) %>
+        <p>reply:<%= reply.body %><%= link_to "(view)", topic_reply_path(reply.topic, reply) %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p><%= @user.username.capitalize %> has no replies to any topics</p>
+<% end %>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

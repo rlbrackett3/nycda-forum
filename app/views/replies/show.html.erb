@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Topic: <%= @reply.topic.title %></h1>
+<p><%= @reply.topic.description.truncate(100) %></p>
+
+<%= link_to 'Edit', edit_reply_path(@reply) %> |
+<%= link_to 'Back', replies_path %>
